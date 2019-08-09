@@ -212,7 +212,7 @@ class Client(object):
         return m.hexdigest()
 
     def _make_request(self, url, params=None, headers=None, query=None,
-                      return_response=False, get_method=None):
+                      return_response=False, get_method=None, update_headers=False):
         """
         Calls the web API.
 
@@ -232,7 +232,7 @@ class Client(object):
                 'Accept-Encoding': 'gzip, deflate',
                 'Connection': 'close',
             }
-            if params or params == '':
+            if params or params == '' or update_headers:
                 headers.update({
                     'x-csrftoken': self.csrftoken,
                     'x-requested-with': 'XMLHttpRequest',
